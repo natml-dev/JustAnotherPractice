@@ -7,10 +7,16 @@ class Person {
 
     public Person(String name, int age) {
         this.name = name;
-        this.age = age;
+        setAge(age);//instead of this.age = age, use setter with validation
     }
 
     public boolean canBuyAlcohol() {
+        // якщо вік невалідний — нічого більше не друкуємо:
+        if (age == -1) {
+            System.out.println(name + "'s age is invalid");
+            return false;
+        }
+        // звичайна логіка:
         if (age < 18) {
             System.out.println(name + " can't buy alcohol, too young");
             return false;
@@ -34,10 +40,10 @@ class Person {
     }
 
     public void setAge(int age) {
-        if (age > 0) {
+        if (age > 0 && age < 130 ) {
             this.age = age;
         } else {
-            System.out.println("Invalid age");
+            this.age = -1; //сторожове значення
         }
     }
 
@@ -47,7 +53,7 @@ class Person {
     public class OppgaveBooleanIf {
         public static void main(String[] args) {
 
-            Person boy = new Person("Lucas", 16);
+            Person boy = new Person("Lucas", -10);
             Person girl = new Person("Elisabeth", 19);
 
             boy.canBuyAlcohol();
